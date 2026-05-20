@@ -1,0 +1,75 @@
+<h3>Dodaj książkę</h3>
+
+<form #bookForm="ngForm" (ngSubmit)="addBook()">
+  <div>
+    <label for="id">Id:</label>
+    <input
+      id="id"
+      type="number"
+      name="id"
+      required
+      min="1"
+      [(ngModel)]="newBook.id"
+      #idCtrl="ngModel"
+      (ngModelChange)="checkId()">
+
+    <div *ngIf="idCtrl.errors?.['min'] && idCtrl.touched">
+      Id musi być większe od 0.
+    </div>
+
+    <div *ngIf="idTaken && idCtrl.valid">
+      Zajęte Id - wybierz inne.
+    </div>
+  </div>
+
+  <div>
+    <label for="title">Tytuł:</label>
+    <input
+      id="title"
+      type="text"
+      name="title"
+      required
+      minlength="5"
+      [(ngModel)]="newBook.title"
+      #titleCtrl="ngModel">
+
+    <div *ngIf="titleCtrl.errors?.['minlength'] && titleCtrl.touched">
+      Tytuł powinien mieć co najmniej 5 znaków.
+    </div>
+  </div>
+
+  <div>
+    <label for="pages">Liczba stron:</label>
+    <input
+      id="pages"
+      type="number"
+      name="pages"
+      required
+      min="10"
+      [(ngModel)]="newBook.pages"
+      #pagesCtrl="ngModel">
+
+    <div *ngIf="pagesCtrl.errors?.['min'] && pagesCtrl.touched">
+      Liczba stron musi wynosić co najmniej 10.
+    </div>
+  </div>
+
+  <div>
+    <label for="releaseDate">Data wydania:</label>
+    <input
+      id="releaseDate"
+      type="date"
+      name="releaseDate"
+      required
+      [(ngModel)]="newBook.releaseDate"
+      #releaseDateCtrl="ngModel">
+  </div>
+
+  <button type="submit" [disabled]="bookForm.invalid || idTaken">
+    Dodaj
+  </button>
+
+  <span *ngIf="bookForm.invalid && bookForm.touched" style="margin-left: 10px;">
+    Należy wszystko uzupełnić.
+  </span>
+</form>

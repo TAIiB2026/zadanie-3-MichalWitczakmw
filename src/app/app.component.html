@@ -1,0 +1,17 @@
+<p>
+  <strong>Data ostatniego pobrania listy:</strong>
+  <span *ngIf="lastFetchDate$ | async as lastFetchDate; else noFetchDate">
+    {{ lastFetchDate | date:'dd-MM-yyyy HH:mm:ss' }}
+  </span>
+  <ng-template #noFetchDate>Brak danych</ng-template>
+</p>
+
+<p>
+  <strong>Data utworzenia instancji serwisu:</strong>
+  <span *ngIf="lastServiceCreationDate$ | async as lastServiceCreationDate; else noCreationDate">
+    {{ lastServiceCreationDate | date:'dd-MM-yyyy HH:mm:ss' }}
+  </span>
+  <ng-template #noCreationDate>Brak danych</ng-template>
+</p>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,24 @@
+<h2>Lista książek</h2>
+
+<button (click)="toggleForm()">
+  {{ showForm ? 'Ukryj formularz' : 'Pokaż formularz' }}
+</button>
+
+<div *ngIf="showForm">
+  <app-book-form (bookAdded)="onBookAdded()"></app-book-form>
+</div>
+
+<div *ngIf="books.length === 0">
+  Brak książek na liście.
+</div>
+
+<ul *ngIf="books.length > 0">
+  <li *ngFor="let book of books">
+    <p><strong>Id:</strong> {{ book.id }}</p>
+    <p><strong>Tytuł:</strong> {{ book.title }}</p>
+    <p><strong>Liczba stron:</strong> {{ book.pages }}</p>
+    <p><strong>Data wydania:</strong> {{ book.releaseDate | date:'dd-MM-yyyy' }}</p>
+    <button (click)="deleteBook(book.id)">Usuń</button>
+    <hr>
+  </li>
+</ul>
